@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBTI 答题助手</title>
+    <meta
+      name="description"
+      content="输入人格代码或中文名，直接查看 SBTI 的答题路径、隐藏题条件、维度等级和可复制 JSON。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top">
+          <span class="brand-mark">SBTI</span>
+          <span class="brand-copy">
+            <strong>答题助手</strong>
+            <small>人格答案查询</small>
+          </span>
+        </a>
+        <nav class="top-nav">
+          <a href="#explorer">人格查询</a>
+          <a href="#toolkit">导出结果</a>
+          <a href="#question-bank">原题查看</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero section-fullbleed">
+          <div class="hero-bg"></div>
+          <div class="hero-grid">
+            <div class="hero-copy reveal-seq">
+              <p class="eyebrow">SBTI 人格答案查询</p>
+              <h1>查人格代码，直接拿到完整答题路径。</h1>
+              <p class="hero-sub">
+                输入人格代码或中文名，立刻看到隐藏题触发条件、30 题选择、维度命中、校验结果和可复制 JSON。
+              </p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#explorer">立即查询</a>
+                <button class="button button-secondary" id="randomHeroBtn" type="button">随机看看</button>
+              </div>
+            </div>
+
+            <div class="hero-metrics reveal-seq reveal-delay-2">
+              <div class="metric-line">
+                <span>数据快照</span>
+                <strong id="metaGeneratedAt">--</strong>
+              </div>
+              <div class="metric-grid">
+                <article>
+                  <span>人格</span>
+                  <strong id="heroCodeCount">27</strong>
+                </article>
+                <article>
+                  <span>正式题</span>
+                  <strong id="heroQuestionCount">30</strong>
+                </article>
+                <article>
+                  <span>特殊题</span>
+                  <strong id="heroSpecialCount">2</strong>
+                </article>
+                <article>
+                  <span>维度</span>
+                  <strong id="heroDimensionCount">15</strong>
+                </article>
+              </div>
+              <p class="metric-note">
+                这个页面适合直接公开给别人查询、复制和下载，不需要懂脚本也能使用。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section explorer" id="explorer">
+          <div class="section-head">
+            <p class="eyebrow">Persona Finder</p>
+            <h2>先选人格，再把可直接提交的答案拿走。</h2>
+          </div>
+
+          <div class="explorer-layout">
+            <aside class="persona-rail">
+              <label class="search-block">
+                <span>搜索人格代码 / 中文名</span>
+                <input id="codeSearch" type="search" placeholder="例如 CTRL、拿捏者、DRUNK" />
+              </label>
+              <div class="rail-meta">
+                <span id="codeResultCount">0</span>
+                <small>个可选人格</small>
+              </div>
+              <div class="code-list" id="codeList"></div>
+            </aside>
+
+            <div class="persona-stage" id="personaStage">
+              <section class="persona-summary split-line">
+                <div>
+                  <p class="eyebrow" id="personaBadge">当前人格</p>
+                  <h3 id="personaTitle">--</h3>
+                  <p class="persona-intro" id="personaIntro">--</p>
+                </div>
+                <div class="summary-actions">
+                  <button class="button button-primary" id="copyChecklistBtn" type="button">复制完整清单</button>
+                  <button class="button button-secondary" id="copyCompactBtn" type="button">复制 value 映射</button>
+                  <button class="button button-secondary" id="downloadJsonBtn" type="button">下载 JSON</button>
+                </div>
+              </section>
+
+              <section class="persona-description split-line">
+                <p id="personaDesc">--</p>
+                <ul class="note-list" id="personaNotes"></ul>
+              </section>
+
+              <section class="detail-grid split-line">
+                <article>
+                  <div class="panel-head">
+                    <span>维度等级</span>
+                    <strong id="levelPatternText">--</strong>
+                  </div>
+                  <div class="level-strip" id="levelStrip"></div>
+                </article>
+
+                <article>
+                  <div class="panel-head">
+                    <span>特殊题条件</span>
+                    <strong id="specialHint">--</strong>
+                  </div>
+                  <div class="special-list" id="specialList"></div>
+                </article>
+
+                <article>
+                  <div class="panel-head">
+                    <span>校验结果</span>
+                    <strong id="verificationHeadline">--</strong>
+                  </div>
+                  <div class="verification-list" id="verificationList"></div>
+                </article>
+              </section>
+
+              <section class="split-line">
+                <div class="panel-head panel-head-spread">
+                  <span>答题路径</span>
+                  <strong id="answerCountText">30 题</strong>
+                </div>
+                <div class="answer-groups" id="answerGroups"></div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="section toolkit" id="toolkit">
+          <div class="section-head">
+            <p class="eyebrow">Export & Share</p>
+            <h2>复制、导出、分享都在这里。</h2>
+          </div>
+
+          <div class="toolkit-grid">
+            <section class="tool-panel split-line">
+              <div class="panel-head panel-head-spread">
+                <span>当前人格 JSON</span>
+                <button class="button button-secondary button-inline" id="copyJsonBtn" type="button">复制 JSON</button>
+              </div>
+              <textarea id="jsonPreview" class="json-preview" readonly spellcheck="false"></textarea>
+            </section>
+
+            <section class="tool-panel split-line">
+              <div class="panel-head">
+                <span>使用说明</span>
+                <strong>公开可用</strong>
+              </div>
+              <ul class="dataset-list">
+                <li>当前人格的答题路径、维度等级和隐藏题条件都会在同一页给全。</li>
+                <li>支持一键复制清单、复制 value 映射、下载 JSON。</li>
+                <li>支持带 hash 的直达链接，例如 <code>#CTRL</code>、<code>#DRUNK</code>。</li>
+                <li>如果你需要自己部署，这也是一个纯静态页面。</li>
+              </ul>
+              <a class="button button-secondary button-inline" id="openSourceBtn" href="#question-bank">去看原题</a>
+            </section>
+          </div>
+        </section>
+
+        <section class="section question-bank" id="question-bank">
+          <div class="section-head">
+            <p class="eyebrow">Question Bank</p>
+            <h2>如果你想核对原题，这里可以直接逐题看。</h2>
+          </div>
+
+          <label class="search-block search-block-wide">
+            <span>搜索题目</span>
+            <input id="questionSearch" type="search" placeholder="输入题号、维度或关键词" />
+          </label>
+          <div class="question-bank-list" id="questionBankList"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="./data/site-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
