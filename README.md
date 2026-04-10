@@ -9,10 +9,6 @@
 - GitHub 仓库：<https://github.com/teee32/sbti-site>
 - GitHub Pages：<https://teee32.github.io/sbti-site/>
 
-## 社区支持
-
-- Linux.do
-
 支持 hash 直达，例如：
 
 - <https://teee32.github.io/sbti-site/#CTRL>
@@ -84,3 +80,7 @@ git push origin main
 - 项目为纯前端静态页面，不依赖打包工具。
 - 页面默认会优先读取 `window.SBTI_SITE_DATA`，否则回退到 `./data/site-data.json`。
 - 若更新数据，建议同时更新 `data/site-data.json` 与 `data/site-data.js`。
+
+## 社区支持
+
+- Linux.do
