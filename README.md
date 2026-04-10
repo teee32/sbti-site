@@ -9,6 +9,10 @@
 - GitHub 仓库：<https://github.com/teee32/sbti-site>
 - GitHub Pages：<https://teee32.github.io/sbti-site/>
 
+## 社区支持
+
+- Linux.do
+
 支持 hash 直达，例如：
 
 - <https://teee32.github.io/sbti-site/#CTRL>
